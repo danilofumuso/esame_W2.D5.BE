@@ -9,6 +9,9 @@ import java.util.List;
 
 public interface PrenotazioneRepository extends JpaRepository<Prenotazione,Long> {
 
+    @Query("SELECT pr FROM Prenotazione pr WHERE pr.utente.id = :utenteId")
+    List<Prenotazione> findAllPrenotazioniByUtente(@Param("utenteId") Long utenteId);
+
     @Query("SELECT pr FROM Prenotazione pr WHERE pr.utente.id = :utenteId AND pr.dataPrenotazione = :dataPrenotazione")
     List<Prenotazione> findPrenotazioniByUtenteAndData(@Param("utenteId") Long utenteId, @Param("dataPrenotazione") LocalDate dataPrenotazione);
 
